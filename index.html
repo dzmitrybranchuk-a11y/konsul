@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Установка приложения</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background-color: #f4f4f9; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; }
+        .container { background: #fff; padding: 2rem; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); max-width: 400px; width: 100%; text-align: center; }
+        h1 { font-size: 1.5rem; margin-bottom: 1.5rem; color: #333; }
+        .selection-box { display: flex; flex-direction: column; gap: 1rem; }
+        .btn { padding: 1rem; border: none; border-radius: 12px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: transform 0.1s, background 0.2s; text-decoration: none; display: block; }
+        .btn:active { transform: scale(0.98); }
+        .btn-ios { background-color: #007AFF; color: white; }
+        .btn-android { background-color: #34C759; color: white; }
+        .instruction { display: none; text-align: left; margin-top: 1.5rem; animation: fadeIn 0.3s ease-in; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .instruction h2 { font-size: 1.2rem; color: #333; margin-bottom: 0.5rem; }
+        .instruction ol { padding-left: 1.2rem; color: #555; line-height: 1.6; }
+        .back-btn { margin-top: 1.5rem; background: none; border: none; color: #007AFF; cursor: pointer; font-size: 0.9rem; }
+        .download-link { display: inline-block; margin-top: 1rem; padding: 0.8rem 1.5rem; background-color: #34C759; color: white; border-radius: 8px; text-decoration: none; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div id="selector">
+        <h1>Выберите устройство</h1>
+        <div class="selection-box">
+            <button class="btn btn-ios" onclick="showInstruction('ios')">iPhone (iOS)</button>
+            <button class="btn btn-android" onclick="showInstruction('android')">Android</button>
+        </div>
+    </div>
+
+    <div id="ios-instruction" class="instruction">
+        <h2>Инструкция для iOS</h2>
+        <p>Для установки вам придут <b>два письма</b> от Apple:</p>
+        <ol>
+            <li><b>Приглашение в App Store Connect</b> — примите его, чтобы получить доступ к сборкам.</li>
+            <li><b>Приглашение в TestFlight</b> — после принятия первого письма, во втором нажмите «View in TestFlight».</li>
+            <li>Установите приложение <b>TestFlight</b> из App Store, если оно еще не установлено.</li>
+            <li>В TestFlight нажмите «Установить» рядом с иконкой приложения.</li>
+        </ol>
+        <button class="back-btn" onclick="reset()">← Назад</button>
+    </div>
+
+    <div id="android-instruction" class="instruction">
+        <h2>Инструкция для Android</h2>
+        <ol>
+            <li>Скачайте APK-файл по кнопке ниже.</li>
+            <li>Откройте файл и разрешите установку из неизвестных источников, если потребуется.</li>
+            <li>Дождитесь завершения установки.</li>
+        </ol>
+        <a href="app-release.apk" class="download-link">Скачать APK</a>
+        <br>
+        <button class="back-btn" onclick="reset()">← Назад</button>
+    </div>
+</div>
+
+<script>
+    function showInstruction(type) {
+        document.getElementById('selector').style.display = 'none';
+        document.querySelectorAll('.instruction').forEach(el => el.style.display = 'none');
+        document.getElementById(type + '-instruction').style.display = 'block';
+    }
+
+    function reset() {
+        document.getElementById('selector').style.display = 'block';
+        document.querySelectorAll('.instruction').forEach(el => el.style.display = 'none');
+    }
+</script>
+
+</body>
+</html>
